@@ -102,32 +102,70 @@ Voilà quelques exemples tiré du laravel-code.tips :
 
 ![](img/abrev.png)
 
+Ne pensez pas que les noms de variables/méthodes longs sont incorrects. Ils ne le sont pas. Ils sont expressifs.
+
+Il vaut mieux appeler une méthode longue que courte et vérifier le docblock pour comprendre ce qu'elle fait.
+
+De même pour les variables. N'utilisez pas d'abréviations absurdes de trois lettres.
+
 
 ![](img/early_return.jpg)
+
+
+Trop d'imbrications et de déclarations "else" ont tendance à rendre le code plus difficile à lire.
 
 
 ![](img/expressive_name.png)
 
 
+Plutôt que de penser "que peut faire cet objet", pensez à "qu'est-ce qui peut être fait avec cet objet". Il y a des exceptions, comme avec les classes d'action, mais c'est une bonne règle générale.
+
+
 ![](img/extract_methods.jpg)
+
+
+Si une méthode est trop longue ou complexe, et qu'il est difficile de comprendre ce qui se passe exactement, divisez la logique en plusieurs méthodes.
 
 
 ![](img/useless_variables.jpg)
 
 
+Ne créez pas de variables inutiles.
+
+
 ![](img/improve_read.png)
+
+
+Parfois, la valeur provient d'un appel complexe et, en tant que tel, la création d'une variable améliore la lisibilité et supprime le besoin d'un commentaire.
+
+Rappelez-vous que le contexte est important et que votre objectif final est la lisibilité.
 
 
 ![](img/use_dto.jpg)
 
 
+Plutôt que de passer un grand nombre d'arguments dans un ordre spécifique, envisagez de créer un objet avec des propriétés pour stocker ces données.
+
+Des points bonus si vous pouvez trouver que certains comportements peuvent être déplacés dans cet objet.
+
+
 ![](img/model_method.jpg)
+
+
+Vos contrôleurs doivent être simples. Ils doivent indiquer des actions telles que "créer une facture pour une commande". Ils ne devraient pas se soucier des détails de la structure de votre base de données. Laissez cela au modèle.
 
 
 ![](img/fluent_objects.png)
 
 
+Vous pouvez également créer des objets avec des APIs fluides. Ajoutez progressivement des données avec des appels séparés, et ne demandez que le strict minimum dans le constructeur.
+
+Chaque méthode renverra $this, donc vous pouvez vous arrêter à n'importe quel appel.
+
+
 ![](img/uselookup.jpg)
+
+Le code sera plus propre et plus lisible, et vous verrez des exceptions compréhensibles si quelque chose se passe mal. Pas de traitement approximatif des cas limites.
 
 
 ## Chapitre 2 : Design pattern
