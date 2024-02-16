@@ -98,7 +98,37 @@ Voici un résumé des règles et conseils à suivre, avec des exemples juste en 
 6. Opacité. Le code est difficile à comprendre.
 
 ### Quelques exemples :
-https://laravel-code.tips/threads/laravel-clean-code-tactics/
+Voilà quelques exemples tiré du laravel-code.tips :
+
+![](img/abrev.png)
+
+
+![](img/early_return.jpg)
+
+
+![](img/expressive_name.png)
+
+
+![](img/extract_methods.jpg)
+
+
+![](img/useless_variables.jpg)
+
+
+![](img/improve_read.png)
+
+
+![](img/use_dto.jpg)
+
+
+![](img/model_method.jpg)
+
+
+![](img/fluent_objects.png)
+
+
+![](img/uselookup.jpg)
+
 
 ## Chapitre 2 : Design pattern
 Les design patterns sont des solutions éprouvées aux problèmes récurrents rencontrés lors de la conception de logiciels. Ils offrent une approche standardisée pour résoudre ces problèmes, ce qui facilite la compréhension du code et améliore sa qualité.
@@ -109,9 +139,10 @@ Les design patterns sont généralement classés en trois catégories principale
 * *Patterns de création* : Ces patterns fournissent des mécanismes pour créer des objets d'une manière qui soit appropriée à la situation. Parmi les exemples les plus courants, on trouve le Singleton, qui garantit qu'une classe n'a qu'une seule instance (un pattern à utiliser avec précaution, ce n'est pas toujours recommandé qu'au dernier recours), et le Factory Method, qui définit une interface pour créer un objet mais laisse les sous-classes décider quelle classe instancier.
 
 * *Patterns de structure* : Ces patterns concernent la composition d'objets pour former des structures plus vastes. Ils aident à définir des relations entre les classes ou les objets, ce qui facilite la création de systèmes évolutifs et modulaires. Des exemples incluent le Composite, qui permet de traiter des objets individuels et des compositions d'objets de manière uniforme, et l'Adapter, qui permet à des interfaces incompatibles de travailler ensemble.
-
+	
 * *Patterns de comportement* : Ces patterns se concentrent sur la communication entre les objets et la manière dont les responsabilités sont réparties entre eux. Ils permettent de définir comment les objets interagissent tout en restant flexibles et extensibles. Parmi les patterns de comportement les plus connus, on trouve l'Observer, qui définit une relation de type un-à-plusieurs entre les objets, et le Strategy, qui permet de sélectionner un algorithme parmi plusieurs en fonction du contexte.
 
+![](img/patterns.jpg)
 
 ### Utilisation et bénéfices
 L'utilisation de design patterns présente plusieurs avantages :
@@ -122,9 +153,6 @@ L'utilisation de design patterns présente plusieurs avantages :
 * Communication : Les design patterns fournissent un langage commun pour discuter et documenter la conception logicielle, ce qui facilite la communication entre les membres de l'équipe.
 
 Cependant, il est important de noter que les design patterns ne sont pas **une solution miracle** et doivent être utilisés avec discernement. Ils doivent être adaptés à chaque situation et leur utilisation excessive peut entraîner une complexité inutile. En général, il est recommandé de les utiliser lorsque le problème qu'ils résolvent est bien compris et qu'ils apportent une valeur ajoutée à la conception du système.
-
-
-https://refactoring.guru/fr/design-patterns/php
 
 ## Chapitre 3 : KISS, SOLID, YAGNI:
 
@@ -163,7 +191,12 @@ La pyramide des tests, initialement décrite par Mike Cohn dans son livre **Succ
 
 3. **Tests IHM/End to End :** En haut de la pyramide, on réduit la quantité de tests de bout en bout ou IHM au strict minimum : Ces tests également appelés tests end-to-end, vérifient le bon fonctionnement de l'application dans son ensemble, en simulant le comportement d'un utilisateur réel. Ils testent les scénarios complets de bout en bout, en vérifiant que toutes les fonctionnalités de l'application fonctionnent correctement. Ce sont des tests lourds et couteux.
 
+
+![](img/tests.jpg)
+
+
 On a d'autres type de tests tels que le golden master, le contract testing, approval testing. Cependant, ces types de tests sont généralement utilisés dans des conditions et des situations très particulières.
+
 
 ### Avantages de la pyramide des tests :
 
@@ -304,6 +337,10 @@ La CI/CD est une pratique de développement logiciel qui consiste à automatiser
      * Parallélisation des Tests Unitaires pour exécuter rapidement une grande suite de tests unitaires.
      * Tests d'Intégration pour vérifier que les différentes parties de l'application fonctionnent correctement ensemble.
      * Tests End-to-End pour simuler les interactions utilisateur réelles et vérifier le bon fonctionnement de l'application dans son ensemble.
+
+
+![](img/ci-cd.jpg)
+
 
 En automatisant ces différentes étapes du processus de développement, la CI/CD permet aux équipes de livrer des logiciels de haute qualité de manière régulière et prévisible. Cela favorise une meilleure collaboration entre les développeurs, une réduction des erreurs et des délais de déploiement plus courts, ce qui est essentiel dans un environnement de développement moderne.
 
