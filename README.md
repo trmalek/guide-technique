@@ -37,22 +37,29 @@ Voici un résumé des règles et conseils à suivre, avec des exemples juste en 
 2. Utilisez des variables explicatives.
 3. Encapsulez les conditions aux limites. Les conditions aux limites sont difficiles à suivre. Mettez leur traitement à un seul endroit : Les conditions limites font référence à des situations particulières ou des valeurs spéciales qui peuvent se produire dans un système ou un ensemble de données. Elles peuvent être difficiles à gérer car elles sortent souvent du flux normal de traitement. Encapsuler ces conditions signifie regrouper toutes les vérifications et manipulations spécifiques à ces cas particuliers dans une seule partie du code, évitant ainsi la duplication. Si elles sont éparpillées dans tout le code, il peut être difficile de les repérer et de les maintenir. Assurer leur centralisation permet de garantir qu'elles sont correctement prises en compte dans toutes les situations possibles.
 
-Exemple plus concret :
+     Exemple plus concret :
 
-* Un produit est éligible s'il est disponible dans le catalogue.
-* Un produit peut être ajouté au panier uniquement s'il est en stock.
-* La quantité d'un produit ne peut pas être négative.
-* Il peut y avoir un maximum de produits d'une même catégorie dans le panier.
-* Le prix unitaire d'un produit ne peut pas être négatif.
-* Le nombre total de produits dans le panier ne peut pas dépasser un certain seuil.
-* Certains produits peuvent avoir des restrictions d'âge (par exemple, pour les produits alcoolisés).
-* Certains produits peuvent avoir des conditions spécifiques de livraison ou de disponibilité géographique.
-* Certains produits peuvent être en promotion ou avoir des remises spéciales qui doivent être correctement appliquées.
-* Certains produits peuvent avoir des conditions spécifiques de paiement (par exemple, paiement à l'avance pour certains articles de grande valeur).
-Chacune de ces règles ou conditions limites nécessiterait une vérification spécifique lors de l'ajout ou de la gestion des produits dans le panier. En les regroupant et en les centralisant dans une seule partie du code, nous pouvons garantir une gestion cohérente et efficace du panier de produits.
+	* Un produit est éligible s'il est disponible dans le catalogue.
+	* Un produit peut être ajouté au panier uniquement s'il est en stock.
+	* La quantité d'un produit ne peut pas être négative.
+	* Il peut y avoir un maximum de produits d'une même catégorie dans le panier.
+	* Le prix unitaire d'un produit ne peut pas être négatif.
+	* Le nombre total de produits dans le panier ne peut pas dépasser un certain seuil.
+	* Certains produits peuvent avoir des restrictions d'âge (par exemple, pour les produits alcoolisés).
+	* Certains produits peuvent avoir des conditions spécifiques de livraison ou de disponibilité géographique.
+	* Certains produits peuvent être en promotion ou avoir des remises spéciales qui doivent être correctement appliquées.
+	* Certains produits peuvent avoir des conditions spécifiques de paiement (par exemple, paiement à l'avance pour certains articles de grande valeur).
+     
+     Chacune de ces règles ou conditions limites nécessiterait une vérification spécifique lors de l'ajout ou de la gestion des produits dans le panier. En les regroupant et en les centralisant dans une seule partie du code, nous pouvons garantir une gestion cohérente et efficace du panier de produits.
 
 4. Préférez les objets de valeur dédiés aux types primitifs : utiliser des objets spécifiques pour représenter des données plutôt que de simplement utiliser des types primitifs comme des chaînes de caractères, des nombres, etc. Ces objets de valeur sont conçus pour encapsuler des données et offrir des fonctionnalités spécifiques liées à ces données. Par exemple, un objet de valeur tel que "Date", présent dans la plupart des langages de programmation, peut être utilisé dans différents contextes pour représenter des dates. Son utilisation assure une cohérence dans la manipulation des dates à travers toute l'application. Un autre exemple courant concerne la représentation du prix. Plutôt que de considérer le prix comme un simple nombre à virgule flottante (float) et de dupliquer certaines logiques dans plusieurs endroits, telles que la présentation suivant la devise, avec et sans TVA, le prix de base et le prix promotionnel, nous pouvons créer un objet "Price" qui encapsule ces informations. Cet objet "Price" peut contenir des éléments tels que la devise, le prix réel, le prix promotionnel, etc., permettant ainsi de centraliser la logique associée au prix et d'assurer sa cohérence à travers l'application.
+
+![](img/price.png)
+
+
 6. Évitez les conditionnels négatifs. Cela signifie réorganiser le code de manière à éviter les constructions conditionnelles qui utilisent des termes négatifs tels que "not", "no", "is not", etc. L'objectif est de rendre le code plus clair, plus lisible et plus facile à comprendre en exprimant les conditions de manière positive plutôt que négative. Prenons un exemple : plutôt que de dire qu'un utilisateur "n'est pas" un administrateur, il est recommandé d'être explicite en indiquant qu'il est un "utilisateur régulier", ou d'être plus précis sur le rôle qu'on cherche à vérifier.
+
+![](img/with_condition.png)
 
 ### Règles de nommage
 1. Choisissez des noms descriptifs et non ambigus.
@@ -189,6 +196,9 @@ Chaque méthode renverra $this, donc vous pouvez vous arrêter à n'importe quel
 
 Le code sera plus propre et plus lisible, et vous verrez des exceptions compréhensibles si quelque chose se passe mal. Pas de traitement approximatif des cas limites.
 
+### Références : 
+* https://laravel-code.tips/threads/laravel-clean-code-tactics/
+* Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin)
 
 ## Chapitre 2 : Design pattern
 Les design patterns sont des solutions éprouvées aux problèmes récurrents rencontrés lors de la conception de logiciels. Ils offrent une approche standardisée pour résoudre ces problèmes, ce qui facilite la compréhension du code et améliore sa qualité.
@@ -198,7 +208,7 @@ Les design patterns sont généralement classés en trois catégories principale
 
 * *Patterns de création* : Ces patterns fournissent des mécanismes pour créer des objets d'une manière qui soit appropriée à la situation. Parmi les exemples les plus courants, on trouve le Singleton, qui garantit qu'une classe n'a qu'une seule instance (un pattern à utiliser avec précaution, ce n'est pas toujours recommandé qu'au dernier recours), et le Factory Method, qui définit une interface pour créer un objet mais laisse les sous-classes décider quelle classe instancier.
 
-* *Patterns de structure* : Ces patterns concernent la composition d'objets pour former des structures plus vastes. Ils aident à définir des relations entre les classes ou les objets, ce qui facilite la création de systèmes évolutifs et modulaires. Des exemples incluent le Composite, qui permet de traiter des objets individuels et des compositions d'objets de manière uniforme, et l'Adapter, qui permet à des interfaces incompatibles de travailler ensemble.
+* *Patterns de structure* : Ces patterns fournissent des mécanismes pour structurer vos classes et objets. Ces patterns sont comme des plans qui nous aident à construire de grands bâtiments avec des petites pièces. Ils nous aident à organiser nos classes et nos objets de manière à ce qu'ils s'emboîtent parfaitement. Par exemple, imagine que tu veuilles assembler des Lego pour faire une maison géante. Les design patterns structurels t'aident à faire en sorte que chaque pièce s'emboîte correctement. Par exemple, le pattern Adapter te permet de transformer des pièces incompatibles en pièces qui peuvent travailler ensemble, tout comme quand tu utilises un adaptateur pour brancher une prise dans une autre prise. Le pattern Composite te permet de manipuler des pièces individuelles et des groupes de pièces de la même manière, comme si elles étaient toutes des Lego simples.
 	
 * *Patterns de comportement* : Ces patterns se concentrent sur la communication entre les objets et la manière dont les responsabilités sont réparties entre eux. Ils permettent de définir comment les objets interagissent tout en restant flexibles et extensibles. Parmi les patterns de comportement les plus connus, on trouve l'Observer, qui définit une relation de type un-à-plusieurs entre les objets, et le Strategy, qui permet de sélectionner un algorithme parmi plusieurs en fonction du contexte.
 
@@ -213,6 +223,11 @@ L'utilisation de design patterns présente plusieurs avantages :
 * Communication : Les design patterns fournissent un langage commun pour discuter et documenter la conception logicielle, ce qui facilite la communication entre les membres de l'équipe.
 
 Cependant, il est important de noter que les design patterns ne sont pas **une solution miracle** et doivent être utilisés avec discernement. Ils doivent être adaptés à chaque situation et leur utilisation excessive peut entraîner une complexité inutile. En général, il est recommandé de les utiliser lorsque le problème qu'ils résolvent est bien compris et qu'ils apportent une valeur ajoutée à la conception du système.
+
+### Références : 
+* https://refactoring.guru/design-patterns (Un site qui contient des exemples de code pour différents langages (Java, PHP, .NET, etc.) avec des explications sur chaque design pattern) 
+* Design Patterns: Elements of Reusable Object-Oriented Software (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)
+* Head First Design Patterns (Eric Freeman, Elisabeth Robson)
 
 ## Chapitre 3 : KISS, SOLID, YAGNI:
 
@@ -237,6 +252,11 @@ KISS, ou "Keep It Simple, Stupid", est un principe de conception qui recommande 
 ### YAGNI (You Ain't Gonna Need It)
 
 YAGNI, ou "You Ain't Gonna Need It", est un principe de développement logiciel qui encourage à ne pas ajouter de fonctionnalités ou de code qui ne sont pas nécessaires pour répondre aux exigences actuelles. L'idée est de ne pas anticiper des fonctionnalités qui pourraient être nécessaires dans le futur, car cela peut conduire à une complexité inutile et à un gaspillage de temps et de ressources. En suivant ce principe, les développeurs se concentrent sur la livraison de fonctionnalités essentielles et évitent de surcharger le système avec des fonctionnalités superflues.
+
+### Références : 
+* https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html
+* Uncle Bob SOLID principles : https://www.youtube.com/watch?v=zHiWqnTWsn4
+* Demystifying Software Development Principles: DRY, KISS, YAGNI, SOLID, GRASP, and LoD: https://levelup.gitconnected.com/demystifying-software-development-principles-dry-kiss-yagni-solid-grasp-and-lod-8606113c0313
 
 
 ## chapitre 4 : Pyramide des tests
@@ -270,7 +290,11 @@ On a d'autres type de tests tels que le golden master, le contract testing, appr
 
 En résumé, la pyramide des tests encourage une approche équilibrée et efficace de la stratégie de tests, en mettant l'accent sur les tests unitaires en tant que fondation, suivis des tests d'intégration et fonctionnels. Cela permet de garantir la qualité du logiciel tout en optimisant les ressources et les efforts nécessaires pour maintenir une suite de tests robuste et fiable.
 
-## Chapitre 5 : Git workflow
+### Références : 
+* https://blog.octo.com/la-pyramide-des-tests-par-la-pratique-1-5
+* https://martinfowler.com/articles/practical-test-pyramid.html
+
+## Chapitre 5 : Git workflows
 Git est un système de contrôle de version distribué largement utilisé dans le développement logiciel moderne. Il offre une gestion collaborative des projets, le suivi des modifications de code et la coordination entre les membres d'une équipe de développement.
 
 Il est important de noter qu'il existe plusieurs workflows Git, chacun adapté à des besoins spécifiques en matière de développement. Ces workflows définissent des conventions et des pratiques pour l'organisation du flux de travail des équipes, allant des processus simples comme le flux de travail centralisé à des approches plus complexes comme le flux de travail Gitflow ou le modèle de bifurcation et de fusion de GitHub.
@@ -279,7 +303,15 @@ Il est important de noter qu'il existe plusieurs workflows Git, chacun adapté �
 
 1. **Gitflow :** Gitflow est un modèle de gestion des branches Git qui divise le développement en différentes branches pour isoler les fonctionnalités, les correctifs de bugs et les versions stables. Il comprend des branches principales telles que `master` pour les versions stables et `develop` pour le développement continu, ainsi que des branches de fonctionnalités et de correctifs de bugs.
 
+
+![](img/gitflow.png)
+
+
 2. **GitHub Flow :** GitHub Flow est un modèle de workflow léger basé sur des branches qui favorise les déploiements continus. Il se concentre sur la création de petites fonctionnalités, qui sont développées sur des branches séparées et fusionnées dans `master` via des pull requests une fois qu'elles sont prêtes à être déployées.
+
+
+![](img/githubflow.png)
+
 
 3. **Trunk Based Development :** Trunk Based Development est une approche où tous les développeurs travaillent sur une seule branche principale (trunk), généralement `master`. Les fonctionnalités sont développées sur de courtes durées et déployées fréquemment. Cela favorise la collaboration en temps réel et accélère le rythme de développement.
 
@@ -339,6 +371,10 @@ Il est important de noter qu'il existe plusieurs workflows Git, chacun adapté �
    - `git diff --staged` : Affiche les différences entre l'index et le dernier commit.
 
 
+### Références : 
+* https://www.atlassian.com/fr/git/tutorials/comparing-workflows
+* Grafikart git workflows : https://www.youtube.com/watch?v=hKXxfHkOfnA 
+
 ## Chapitre 6: Revue de code
 
 
@@ -372,6 +408,12 @@ La revue de code est une pratique essentielle (mais pas systèmatique) dans le p
 
 7. **Pair/Mob Programming :** Le pair/mob programming est une pratique où deux développeurs (ou plus) travaillent ensemble sur le même code : l'un pilote tandis que les autres observent et font des suggestions. Le rôle de pilote tourne entre les membres de l'équipe. Cette approche permet une revue de code en direct, favorisant un partage immédiat des connaissances et des idées, et facilitant la détection précoce des erreurs. C'est une méthode efficace pour améliorer la qualité du code et renforcer la collaboration au sein de l'équipe. Utilisez dès que possible le pair ou le mob programming permet d'éviter une longue revue de code ou des discussions sur des choix d'implémentations. C'est vivement recommandé surtout pour la partie conception et architecture, ainsi que pour les discussions sur les choix des techniques, faites cela ensemble et décidez avant de vous lancer dans le développement. Cela facilite énormément la tâche.
 
+
+### Références : 
+* XCraft - Revue de code : on n'est pas venue·e·s pour souffrir : https://www.youtube.com/watch?v=jAszt6u1tMk
+* Stratégie de mise en place de revues de code: https://www.youtube.com/watch?v=3JCMwYx0zN8
+* TDD, Clean Code et autres pratiques essentielles : (Cyrille Martraire, Arnaud Thiéfaine, Dorra Bartaguiz, Fabien Hiegel, Houssam Fakih)
+
 ## Chapitre 7 : CI/CD
 
 ### CI/CD (Continuous Integration/Continuous Delivery) :
@@ -403,6 +445,12 @@ La CI/CD est une pratique de développement logiciel qui consiste à automatiser
 
 
 En automatisant ces différentes étapes du processus de développement, la CI/CD permet aux équipes de livrer des logiciels de haute qualité de manière régulière et prévisible. Cela favorise une meilleure collaboration entre les développeurs, une réduction des erreurs et des délais de déploiement plus courts, ce qui est essentiel dans un environnement de développement moderne.
+
+### Références : 
+* Continuous Integration: Improving Software Quality and Reducing Risk (Martin Fowler)
+* France DevOps : Votre CI-CD aux petits oignons avec Gitlab CI: https://www.youtube.com/watch?v=INL1VOO08Hk
+* CI/CD, le divorce serait-il prononcé ? (Nicolas GIRAUD et Yann Schepens): https://www.youtube.com/watch?v=rZKAPyKdbXM
+
 
 ## Conclusion
 
