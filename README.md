@@ -35,10 +35,24 @@ Voici un résumé des règles et conseils à suivre, avec des exemples juste en 
 ### Conseils de compréhensibilité
 1. Soyez cohérent. Si vous faites quelque chose d'une certaine manière, faites toutes les choses similaires de la même manière.
 2. Utilisez des variables explicatives.
-3. Encapsulez les conditions aux limites. Les conditions aux limites sont difficiles à suivre. Mettez leur traitement à un seul endroit.
-4. Préférez les objets de valeur dédiés aux types primitifs.
-5. Évitez les dépendances logiques. Ne créez pas de méthodes qui fonctionnent correctement en fonction de quelque chose d'autre dans la même classe.
-6. Évitez les conditionnels négatifs.
+3. Encapsulez les conditions aux limites. Les conditions aux limites sont difficiles à suivre. Mettez leur traitement à un seul endroit : Les conditions limites font référence à des situations particulières ou des valeurs spéciales qui peuvent se produire dans un système ou un ensemble de données. Elles peuvent être difficiles à gérer car elles sortent souvent du flux normal de traitement. Encapsuler ces conditions signifie regrouper toutes les vérifications et manipulations spécifiques à ces cas particuliers dans une seule partie du code, évitant ainsi la duplication. Si elles sont éparpillées dans tout le code, il peut être difficile de les repérer et de les maintenir. Assurer leur centralisation permet de garantir qu'elles sont correctement prises en compte dans toutes les situations possibles.
+
+Exemple plus concret :
+
+* Un produit est éligible s'il est disponible dans le catalogue.
+* Un produit peut être ajouté au panier uniquement s'il est en stock.
+* La quantité d'un produit ne peut pas être négative.
+* Il peut y avoir un maximum de produits d'une même catégorie dans le panier.
+* Le prix unitaire d'un produit ne peut pas être négatif.
+* Le nombre total de produits dans le panier ne peut pas dépasser un certain seuil.
+* Certains produits peuvent avoir des restrictions d'âge (par exemple, pour les produits alcoolisés).
+* Certains produits peuvent avoir des conditions spécifiques de livraison ou de disponibilité géographique.
+* Certains produits peuvent être en promotion ou avoir des remises spéciales qui doivent être correctement appliquées.
+* Certains produits peuvent avoir des conditions spécifiques de paiement (par exemple, paiement à l'avance pour certains articles de grande valeur).
+Chacune de ces règles ou conditions limites nécessiterait une vérification spécifique lors de l'ajout ou de la gestion des produits dans le panier. En les regroupant et en les centralisant dans une seule partie du code, nous pouvons garantir une gestion cohérente et efficace du panier de produits.
+
+4. Préférez les objets de valeur dédiés aux types primitifs : utiliser des objets spécifiques pour représenter des données plutôt que de simplement utiliser des types primitifs comme des chaînes de caractères, des nombres, etc. Ces objets de valeur sont conçus pour encapsuler des données et offrir des fonctionnalités spécifiques liées à ces données. Par exemple, un objet de valeur tel que "Date", présent dans la plupart des langages de programmation, peut être utilisé dans différents contextes pour représenter des dates. Son utilisation assure une cohérence dans la manipulation des dates à travers toute l'application. Un autre exemple courant concerne la représentation du prix. Plutôt que de considérer le prix comme un simple nombre à virgule flottante (float) et de dupliquer certaines logiques dans plusieurs endroits, telles que la présentation suivant la devise, avec et sans TVA, le prix de base et le prix promotionnel, nous pouvons créer un objet "Price" qui encapsule ces informations. Cet objet "Price" peut contenir des éléments tels que la devise, le prix réel, le prix promotionnel, etc., permettant ainsi de centraliser la logique associée au prix et d'assurer sa cohérence à travers l'application.
+6. Évitez les conditionnels négatifs. Cela signifie réorganiser le code de manière à éviter les constructions conditionnelles qui utilisent des termes négatifs tels que "not", "no", "is not", etc. L'objectif est de rendre le code plus clair, plus lisible et plus facile à comprendre en exprimant les conditions de manière positive plutôt que négative. Prenons un exemple : plutôt que de dire qu'un utilisateur "n'est pas" un administrateur, il est recommandé d'être explicite en indiquant qu'il est un "utilisateur régulier", ou d'être plus précis sur le rôle qu'on cherche à vérifier.
 
 ### Règles de nommage
 1. Choisissez des noms descriptifs et non ambigus.
@@ -54,7 +68,15 @@ Voici un résumé des règles et conseils à suivre, avec des exemples juste en 
 3. Utilisez des noms descriptifs.
 4. Préférez moins d'arguments.
 5. N'ont pas d'effets secondaires.
-6. N'utilisez pas d'arguments de drapeau. Divisez la méthode en plusieurs méthodes indépendantes pouvant être appelées par le client sans le drapeau.
+6. Ne pas utiliser d'arguments d'indicateur (des booléens). Au lieu de cela, la méthode devrait être divisée en plusieurs méthodes indépendantes, chacune ayant un comportement spécifique, et ces méthodes peuvent être appelées individuellement sans avoir besoin de passer des indicateurs. L'utilisation d'arguments d'indicateur peut rendre le code source complexe et difficile à comprendre, et cela viole le principe SOLID qui recommande de n'avoir qu'une seule raison de modifier une méthode. En divisant la méthode en plusieurs méthodes indépendantes, chaque méthode peut se concentrer sur une tâche spécifique et éviter la confusion liée à l'utilisation des indicateurs. Cela rend le code plus modulaire, plus facile à comprendre et plus facile à maintenir.
+Exemple : 
+* avec indicateur : 
+
+![](img/with_flag.png)
+
+* sans indicateur : 
+
+![](img/without_flag.png)
 
 ### Règles de commentaires
 1. Essayez toujours de vous expliquer dans le code.
